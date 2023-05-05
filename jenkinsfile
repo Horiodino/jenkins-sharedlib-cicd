@@ -1,0 +1,13 @@
+pipeline{
+    agent any 
+    stages{
+        stage("A"){
+            steps{
+                echo "========executing A========"
+                script {
+                    git branch: 'main', credentialsId: 'github', url: 'https://github.com/Horiodino/jenkins-sharedlib-cicd.git'
+                }
+            }
+        }
+    }
+}
