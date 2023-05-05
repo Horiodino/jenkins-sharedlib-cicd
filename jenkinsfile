@@ -4,7 +4,6 @@ pipeline{
     stages{
         stage("scm checkout"){
             steps{
-                echo "========executing A========"
                 script {
                     gitCheckout(
                         branch: "main",
@@ -17,7 +16,6 @@ pipeline{
 
         stage ("Unit test maven")
         steps{
-            echo "========executing B========"
             script{
                 mvnTest()
             }
