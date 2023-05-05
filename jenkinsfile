@@ -2,7 +2,7 @@
 pipeline{
     agent any 
     stages{
-        stage("A"){
+        stage("scm checkout"){
             steps{
                 echo "========executing A========"
                 script {
@@ -12,6 +12,14 @@ pipeline{
                     )
                     
                 }
+            }
+        }
+
+        stage ("Unit test maven")
+        steps{
+            echo "========executing B========"
+            script{
+                mvnTest()
             }
         }
     }
