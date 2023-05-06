@@ -4,6 +4,9 @@ pipeline{
 
     parameters{
         choice(name :'action', choices: 'create\ndelete', description: 'what action to perform create/destroy')
+        string(name: 'dockerimagename , description: 'docker image name', defaultValue: 'dockerimage')
+        string(name: 'dockeruser', description: 'docker user', defaultValue: 'holiodin')
+        string(name: 'imgtag', description: 'docker image tag', defaultValue: 'latest')
     }
     stages{
         stage("scm checkout"){
@@ -73,6 +76,16 @@ pipeline{
                 script{
                     mvnBuild()
                 }
+            }
+        }
+        stage("Dcoker build"){
+            when { 
+                expression { params.action == 'create' }
+            }
+            steps{
+
+                dockerBuild("${params.dockerimagename}", "$params.dockeruser", "${params.imgtag}")
+
             }
         }
     }
