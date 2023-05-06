@@ -107,5 +107,14 @@ pipeline{
                 dockerPush("${params.imgname}", "${params.imgtag}", "${params.dockeruser}")
             }
         }
+        stage("Dcoker cleanup"){
+            when { 
+                expression { params.action == 'create' }
+            }
+            steps{
+                sh "docker rmi ${params.dockeruser}/${params.imgname}:${params.imgtag}"
+                sh "docker rmi ${params.dockeruser}/${params.imgname}:latest"
+            }
+        }
     }
 }
