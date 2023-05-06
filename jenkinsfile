@@ -1,4 +1,4 @@
-@Library('shared-lib') _
+@Library('shared-lib') _  
 pipeline{
     agent any 
     stages{
@@ -18,6 +18,14 @@ pipeline{
             steps{
                 script{
                     mvnTest()
+                }
+            }
+        }
+
+        stage ("intigration test mvn"){
+            steps{
+                script{
+                    mvnintergrationTest()
                 }
             }
         }
