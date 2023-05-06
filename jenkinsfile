@@ -98,5 +98,14 @@ pipeline{
 
             }
         }
+
+        stage("dockerhub push"){
+            when { 
+                expression { params.action == 'create' }
+            }
+            steps{
+                dockerPush("${params.imgname}", "${params.imgtag}", "${params.dockeruser}")
+            }
+        }
     }
 }
