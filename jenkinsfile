@@ -112,8 +112,10 @@ pipeline{
                 expression { params.action == 'create' }
             }
             steps{
-                sh "docker rmi ${params.dockeruser}/${params.imgname}:${params.imgtag}"
-                sh "docker rmi ${params.dockeruser}/${params.imgname}:latest"
+                sh"""
+                docker rmi ${params.dockeruser}/${params.imgname}:${params.imgtag}
+                """
+                
             }
         }
     }
