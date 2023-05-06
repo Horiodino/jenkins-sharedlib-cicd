@@ -4,9 +4,9 @@ pipeline{
 
     parameters{
         choice(name :'action', choices: 'create\ndelete', description: 'what action to perform create/destroy')
-        string(name: 'dockerimagename', description: 'docker image name', defaultValue: 'jenkins-sharedlib-cicd')
-        string(name: 'dockeruser', description: 'docker user', defaultValue: 'holiodin')
-        string(name: 'imgtag', description: 'docker image tag', defaultValue: 'latest')
+        string(name :imgname, defaultValue: 'jenkins-sharedlib-cicd', description: 'docker image name')
+        string(name :imgtag, defaultValue: 'latest', description: 'docker image tag')
+        string(name :dockeruser, defaultValue: 'horiodino', description: 'docker user name')
     }
     stages{
         stage("scm checkout"){
