@@ -84,7 +84,7 @@ pipeline{
             }
             steps{
 
-                dockerBuild("${params.dockerimagename}", "$params.dockeruser", "${params.imgtag}")
+                dockerBuild("${params.imgname}", "${params.imgtag}", "${params.dockeruser}")
 
             }
         }
