@@ -1,8 +1,15 @@
 @Library('shared-lib') _  
 pipeline{
     agent any 
+
+    parameters{
+        choice(name :'action', choices: 'create\ndelete', description: 'what action to perform create/destroy')
+    }
     stages{
         stage("scm checkout"){
+            when {
+            expression { params.action == 'create' }
+                }
             steps{
                 script {
                     gitCheckout(
@@ -14,7 +21,10 @@ pipeline{
             }
         }
 
-        stage("build"){
+        when {
+            expression { params.action == 'create' }
+        }
+        stage("unit test maven"){
             steps{
                 script{
                     mvnTest()
@@ -23,9 +33,23 @@ pipeline{
         }
 
         stage ("intigration test mvn"){
+                when {
+            expression { params.action == 'create' }
+        }
             steps{
                 script{
                     mvnintergrationTest()
+                }
+            }
+        }
+
+        stage("staticcodeAnalysis"){
+            when { 
+                expression { params.action == 'create' }
+            }
+            steps{
+                script{
+                    staticCodeAnalysis()
                 }
             }
         }
