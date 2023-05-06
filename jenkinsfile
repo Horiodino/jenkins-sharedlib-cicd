@@ -65,5 +65,15 @@ pipeline{
                 }
             }
         }
+        stage("mvn build -jar"){
+            when { 
+                expression { params.action == 'create' }
+            }
+            steps{
+                script{
+                    mvnBuild()
+                }
+            }
+        }
     }
 }
