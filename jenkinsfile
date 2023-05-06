@@ -4,7 +4,7 @@ pipeline{
 
     parameters{
         choice(name :'action', choices: 'create\ndelete', description: 'what action to perform create/destroy')
-        string(name: 'dockerimagename , description: 'docker image name', defaultValue: 'dockerimage')
+        string(name: 'dockerimagename', description: 'docker image name', defaultValue: 'jenkins-sharedlib-cicd')
         string(name: 'dockeruser', description: 'docker user', defaultValue: 'holiodin')
         string(name: 'imgtag', description: 'docker image tag', defaultValue: 'latest')
     }
